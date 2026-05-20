@@ -1,0 +1,22 @@
+# --- context-builder:start ---
+# Managed by /context-builder. Folders kept local-only.
+_worktree/
+_context/
+CLAUDE.md
+# --- context-builder:end ---
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs / runtime artifacts
+*.log
+/tmp/work-logger.lock.d/
