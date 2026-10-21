@@ -1,0 +1,17 @@
+{
+  "name": "work-logger",
+  "description": "Work Logger: automatic daily work logging for Claude Code.",
+  "owner": {
+    "name": "Bishal Raj Parajuli",
+    "url": "https://github.com/Bishal-Raj-Parajuli"
+  },
+  "plugins": [
+    {
+      "name": "work-logger",
+      "source": "./",
+      "description": "Automatic daily work log across all your Claude Code projects, grouped by date and project.",
+      "version": "1.0.0",
+      "category": "productivity"
+    }
+  ]
+}

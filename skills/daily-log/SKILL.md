@@ -2,7 +2,7 @@
 name: daily-log
 description: >
   Show today's daily work log collected by the work logger. Use when the user
-  says "/daily-log", "show my log", "what did I do today", "show daily log",
+  says "/work-logger:daily-log", "/daily-log", "show my log", "what did I do today", "show daily log",
   "review my log", or "get my summary ready". Reads the log
   (~/.claude/daily-log.md, or $CLAUDE_DAILY_LOG) and displays today's entries
   grouped by project. Can also export a clean per-project summary suitable for
@@ -22,8 +22,8 @@ Print the day's section with the logger script. It finds the log file
 `## YYYY-MM-DD` up to the next date:
 
 ```bash
-bash ~/.claude/scripts/work-logger.sh --show              # today
-bash ~/.claude/scripts/work-logger.sh --show 2025-01-15   # a specific day
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/work-logger.sh" --show              # today
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/work-logger.sh" --show 2025-01-15   # a specific day
 ```
 
 Then pick the output mode from `$ARGUMENTS`:

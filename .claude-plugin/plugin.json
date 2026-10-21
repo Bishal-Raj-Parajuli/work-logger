@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "work-logger",
+  "version": "1.0.0",
+  "description": "Automatic daily work log across all your Claude Code projects: hooks record session start/end and a one-line summary of each turn into one local markdown file, grouped by date and project.",
+  "author": {
+    "name": "Bishal Raj Parajuli",
+    "url": "https://github.com/Bishal-Raj-Parajuli"
+  },
+  "homepage": "https://github.com/Bishal-Raj-Parajuli/work-logger",
+  "repository": "https://github.com/Bishal-Raj-Parajuli/work-logger",
+  "license": "MIT",
+  "keywords": ["productivity", "work-log", "standup", "daily-summary", "hooks", "time-tracking"]
+}

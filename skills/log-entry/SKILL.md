@@ -4,7 +4,7 @@ description: >
   Manually add an entry to the daily work log (~/.claude/daily-log.md, or
   $CLAUDE_DAILY_LOG). Use when doing non-code work that the automatic work
   logger won't capture: meetings, emails, research, decisions, blockers, or
-  anything you want in your daily summary. Trigger on "/log-entry", "/log",
+  anything you want in your daily summary. Trigger on "/work-logger:log-entry", "/log-entry", "/log",
   "log this", "add to daily log", or when the user says something like
   "note that I did X" or "record that".
 argument-hint: <what you did>
@@ -18,7 +18,7 @@ Append a manual entry to the daily work log. The log file lives at
 
 ## When this fires
 
-The user types `/log-entry <description>` or says "log this", "add to my log", etc.
+The user types `/work-logger:log-entry <description>` or says "log this", "add to my log", etc.
 The `$ARGUMENTS` variable contains what they want logged.
 
 ## What to do
@@ -33,7 +33,7 @@ The `$ARGUMENTS` variable contains what they want logged.
 4. Check today's log for an entry that already says the same thing:
 
    ```bash
-   bash ~/.claude/scripts/work-logger.sh --show
+   bash "${CLAUDE_PLUGIN_ROOT}/scripts/work-logger.sh" --show
    ```
 
    If it is already there, tell the user and stop.
@@ -42,7 +42,7 @@ The `$ARGUMENTS` variable contains what they want logged.
    and backticks in the text are never interpreted by the shell:
 
    ```bash
-   bash ~/.claude/scripts/work-logger.sh --manual "General" <<'ENTRY'
+   bash "${CLAUDE_PLUGIN_ROOT}/scripts/work-logger.sh" --manual "General" <<'ENTRY'
    Met with team about API redesign
    ENTRY
    ```

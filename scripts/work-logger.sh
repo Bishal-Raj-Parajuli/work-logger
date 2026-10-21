@@ -221,14 +221,14 @@ def is_user_prompt(entry):
 
 
 def last_turn(entries):
-    """Return (last assistant text, edited file paths) for the latest turn."""
+    """Return (last assistant text, edited file paths, used the logger) for the latest turn."""
     turn = []
     for entry in reversed(entries):
         if is_user_prompt(entry):
             break
         turn.append(entry)
     turn.reverse()
-    text, edited = "", []
+    text, edited, used_logger = "", [], False
     for entry in turn:
         if entry.get("type") != "assistant":
             continue
@@ -242,7 +242,10 @@ def last_turn(entries):
                 path = inp.get("file_path") or inp.get("notebook_path")
                 if path and path not in edited:
                     edited.append(path)
-    return text, edited
+            elif block.get("type") == "tool_use" and block.get("name") == "Bash":
+                if "work-logger.sh" in str((block.get("input") or {}).get("command", "")):
+                    used_logger = True
+    return text, edited, used_logger
 
 
 def first_meaningful_line(text):
@@ -262,7 +265,9 @@ def first_meaningful_line(text):
 
 
 def stop_summary(data, cwd):
-    text, edited = last_turn(read_transcript_tail(data.get("transcript_path")))
+    text, edited, used_logger = last_turn(read_transcript_tail(data.get("transcript_path")))
+    if used_logger and not edited:
+        return ""  # a /log-entry or /daily-log turn; logging it again is just noise
     if isinstance(data.get("last_assistant_message"), str) and data["last_assistant_message"].strip():
         text = data["last_assistant_message"]
     summary = one_line(first_meaningful_line(text), 150)
@@ -345,7 +350,7 @@ def main():
     if event == "SessionStart":
         branch = git(cwd, "branch", "--show-current") or "n/a"
         write_entry(project, f"- **{NOW}** 🟢 Session started (branch: `{branch}`)")
-    elif event == "Stop":
+    elif event == "Stop" and not os.environ.get("WORK_LOGGER_SKIP_STOP"):
         summary = stop_summary(data, cwd)
         # Only log Stop events with a meaningful summary
         if len(summary) > 5:
