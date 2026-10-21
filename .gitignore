@@ -19,3 +19,6 @@ CLAUDE.md
 
 # Logs / runtime artifacts
 *.log
+
+# Build output
+dist/

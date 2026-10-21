@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="Work Logger logo" width="128" height="128">
+</p>
+
 # Work Logger
 
 **Automatic daily work logging for [Claude Code](https://docs.claude.com/en/docs/claude-code) — across all your projects, with zero effort.**
